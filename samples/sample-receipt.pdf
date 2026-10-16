@@ -1,0 +1,68 @@
+%PDF-1.4
+%ту╧╙
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 226 400] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 1311 >>
+stream
+BT /F2 15 Tf 14 372 Td (CAFE SAKURA) Tj ET
+BT /F1 8 Tf 14 358 Td (Shibuya Jinnan) Tj ET
+BT /F1 7 Tf 14 347 Td (1-2-3 Jinnan, Shibuya-ku, Tokyo 150-0041) Tj ET
+BT /F1 7 Tf 14 337 Td (TEL 03-1234-5678) Tj ET
+BT /F1 7 Tf 14 327 Td (Registration No. T1234567890123) Tj ET
+BT /F2 11 Tf 14 305 Td (RECEIPT) Tj ET
+BT /F1 8 Tf 14 292 Td (Date: 2026/10/12 \(Mon\) 09:41) Tj ET
+BT /F1 8 Tf 14 281 Td (Receipt No. 0042    Eat-in    Staff: Sato) Tj ET
+[2 2] 0 d 0.5 w 14 272 m 212 272 l S
+BT /F1 8 Tf 14 259 Td (Cafe Latte \(M\)) Tj ET
+BT /F1 8 Tf 119.312 259 Td (2 x е420) Tj ET
+BT /F1 8 Tf 194.208 259 Td (е840) Tj ET
+BT /F1 8 Tf 14 246 Td (Matcha Madeleine) Tj ET
+BT /F1 8 Tf 119.312 246 Td (1 x е324) Tj ET
+BT /F1 8 Tf 194.208 246 Td (е324) Tj ET
+[2 2] 0 d 0.5 w 14 237 m 212 237 l S
+BT /F1 8 Tf 14 224 Td (Subtotal \(2 items\)) Tj ET
+BT /F1 8 Tf 187.536 224 Td (е1,164) Tj ET
+BT /F1 8 Tf 14 211 Td (Consumption tax \(10%\)) Tj ET
+BT /F1 8 Tf 194.208 211 Td (е116) Tj ET
+BT /F2 12 Tf 14 194 Td (TOTAL) Tj ET
+BT /F2 12 Tf 175.304 194 Td (е1,280) Tj ET
+[] 0 d 0.5 w 14 178 m 212 178 l S
+BT /F1 8 Tf 14 165 Td (Payment: Suica \(IC card\)) Tj ET
+BT /F1 8 Tf 187.536 165 Td (е1,280) Tj ET
+BT /F1 8 Tf 14 152 Td (Change) Tj ET
+BT /F1 8 Tf 203.104 152 Td (е0) Tj ET
+BT /F1 8 Tf 14 125 Td (Thank you! Please come again.) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Title (Sample receipt - Cafe Sakura) /Producer (ExpenseFlow make_sample_receipt.py) >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000354 00000 n 
+0000000456 00000 n 
+0000001818 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+1924
+%%EOF

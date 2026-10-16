@@ -1,0 +1,53 @@
+# Publishes the demo mode of the app (npm run dev:mock: in-memory backend, no AWS) to GitHub Pages.
+# The site appears at https://<your-github-user>.github.io/<repo-name>/ and needs no AWS account.
+#
+# One-time setup: repository Settings > Pages > "Build and deployment" > Source: GitHub Actions.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write # lets deploy-pages publish the site
+  id-token: write # lets deploy-pages prove to GitHub that the deployment comes from this workflow
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - name: Build the demo (served below /<repo-name>/, not at the domain root)
+        working-directory: frontend
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+        run: npm run build:pages
+      # GitHub Pages has no SPA fallback: it serves 404.html for unknown paths. The app is its own
+      # router, so a copy of index.html makes a reload on /<repo-name>/expenses open the right page.
+      - run: cp frontend/dist-pages/index.html frontend/dist-pages/404.html
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: frontend/dist-pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

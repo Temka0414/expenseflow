@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 450" width="860" height="450" role="img" aria-label="SQS queue with a dead-letter queue and an idempotent consumer">
+<title>SQS queue with a dead-letter queue and an idempotent consumer</title>
+<style>.t{font:700 15px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.s{font:14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#334155}.m{font:14px ui-monospace, 'Cascadia Mono', Consolas, 'SFMono-Regular', Menlo, monospace;fill:#334155}.a{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#1e293b}.g{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#64748b}.h{font:700 17px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.b{font:700 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#ffffff}</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<rect width="860" height="450" fill="#ffffff"/>
+<rect x="20" y="40" width="150" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="95.0" y="68" text-anchor="middle" class="t">Event bus</text>
+<text x="95.0" y="90" text-anchor="middle" class="s">rule</text>
+<rect x="290" y="40" width="230" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="405.0" y="68" text-anchor="middle" class="t">notifications queue</text>
+<text x="405.0" y="90" text-anchor="middle" class="s">visibility timeout 180 s</text>
+<rect x="620" y="40" width="220" height="88" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="730.0" y="68" text-anchor="middle" class="t">notifier</text>
+<text x="730.0" y="90" text-anchor="middle" class="s">batch of 10</text>
+<text x="730.0" y="110" text-anchor="middle" class="s">email via SES</text>
+<rect x="290" y="230" width="230" height="68" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="405.0" y="258" text-anchor="middle" class="t">NotificationsDlq</text>
+<text x="405.0" y="280" text-anchor="middle" class="s">after 3 failed receives</text>
+<rect x="620" y="230" width="210" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="725.0" y="258" text-anchor="middle" class="t">Idempotency table</text>
+<text x="725.0" y="280" text-anchor="middle" class="s">key: idempotencyKey</text>
+<rect x="290" y="350" width="230" height="68" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="405.0" y="378" text-anchor="middle" class="t">CloudWatch alarm</text>
+<text x="405.0" y="400" text-anchor="middle" class="s">DLQ has 1 or more messages</text>
+<rect x="620" y="350" width="200" height="68" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="720.0" y="378" text-anchor="middle" class="t">SNS topic</text>
+<text x="720.0" y="400" text-anchor="middle" class="s">email to you</text>
+<path d="M 170 74.0 L 290 74.0" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<path d="M 520 74.0 L 620 74.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 405.0 108 L 405.0 230" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<path d="M 725.0 128 L 725.0 230" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 405.0 298 L 405.0 350" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 520 384.0 L 620 384.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="550.0" y="63.0" width="40.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="570.0" y="79.0" text-anchor="middle" class="a">poll</text>
+<rect x="398.8" y="158.0" width="92.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="445.0" y="174.0" text-anchor="middle" class="a">moved aside</text>
+<rect x="721.0" y="168.0" width="100.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="771.0" y="184.0" text-anchor="middle" class="a">skip if seen</text>
+<rect x="546.2" y="373.0" width="47.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="570.0" y="389.0" text-anchor="middle" class="a">alarm</text>
+</svg>

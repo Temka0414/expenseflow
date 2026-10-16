@@ -1,0 +1,75 @@
+# Deploys every ExpenseFlow stack to AWS from GitHub Actions, without any stored AWS access key.
+#
+# One-time setup (details: scripts/README.md and docs/):
+#   1. Deploy the ExpenseFlow-GitHubOidc stack once from your PC:
+#        npx cdk deploy ExpenseFlow-GitHubOidc -c githubRepo=<owner>/<repo>
+#   2. In GitHub (Settings > Secrets and variables > Actions > Variables) create:
+#        AWS_DEPLOY_ROLE_ARN  the stack's DeployRoleArn output
+#        AWS_REGION           the Region of that stack and of your bootstrapped CDK environment
+#        STAGE                optional; defaults to dev
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write # lets the job ask GitHub for the OIDC token that AWS exchanges for temporary credentials
+  contents: read
+
+# Never interrupt a running CloudFormation deployment: a second run waits for the first.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Skipped (not failed) until you finish the one-time setup above, so pushes before then stay green.
+    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+    # Do not add `environment:` to this job. It changes the OIDC `sub` claim from
+    # repo:<owner>/<repo>:ref:refs/heads/main to repo:<owner>/<repo>:environment:<name>,
+    # and then the role's trust policy no longer matches.
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            infra/requirements.txt
+            backend/requirements.txt
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            infra/package-lock.json
+      # cdk.json runs `python app.py`, so the CDK libraries must be installed for this python.
+      - run: pip install -r infra/requirements.txt
+      - name: Build the frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Deploy all stacks
+        working-directory: infra
+        # --require-approval never: the CDK's confirmation prompt for IAM and security-group changes cannot
+        # be answered in CI, and it would hang the job. Changes reach main through review instead, and the
+        # role can only act through the CDK bootstrap roles (see github_oidc_stack.py).
+        run: |
+          npm ci
+          npx cdk deploy --all -c stage=${{ vars.STAGE || 'dev' }} --require-approval never
+      # The CloudFormation templates that were deployed: handy to compare with a later run.
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: cloudformation-templates
+          path: infra/cdk.out/*.template.json
+          retention-days: 14

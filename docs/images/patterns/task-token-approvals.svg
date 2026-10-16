@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 500" width="860" height="500" role="img" aria-label="ApprovalWorkflow waits for a task token until a manager decides, escalates once, then expires">
+<title>ApprovalWorkflow waits for a task token until a manager decides, escalates once, then expires</title>
+<style>.t{font:700 15px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.s{font:14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#334155}.m{font:14px ui-monospace, 'Cascadia Mono', Consolas, 'SFMono-Regular', Menlo, monospace;fill:#334155}.a{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#1e293b}.g{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#64748b}.h{font:700 17px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.b{font:700 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#ffffff}</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<rect width="860" height="500" fill="#ffffff"/>
+<rect x="20" y="30" width="190" height="88" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="115.0" y="58" text-anchor="middle" class="t">Claim + policy</text>
+<text x="115.0" y="80" text-anchor="middle" class="s">ClaimExpense,</text>
+<text x="115.0" y="100" text-anchor="middle" class="s">LoadPolicy</text>
+<rect x="330" y="30" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="425.0" y="58" text-anchor="middle" class="t">CanAutoApprove?</text>
+<text x="425.0" y="80" text-anchor="middle" class="s">Choice</text>
+<rect x="640" y="30" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="735.0" y="58" text-anchor="middle" class="t">AutoApprove</text>
+<text x="735.0" y="80" text-anchor="middle" class="s">small + AI-verified</text>
+<rect x="330" y="190" width="190" height="68" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="425.0" y="218" text-anchor="middle" class="t">RequestApproval</text>
+<text x="425.0" y="240" text-anchor="middle" class="s">waits for the token</text>
+<rect x="20" y="190" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="115.0" y="218" text-anchor="middle" class="t">approval_request</text>
+<text x="115.0" y="240" text-anchor="middle" class="s">stores the token</text>
+<rect x="330" y="330" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="425.0" y="358" text-anchor="middle" class="t">RecordDecision</text>
+<text x="425.0" y="380" text-anchor="middle" class="s">APPROVED or REJECTED</text>
+<rect x="20" y="330" width="200" height="88" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="120.0" y="358" text-anchor="middle" class="t">Escalate, wait again,</text>
+<text x="120.0" y="380" text-anchor="middle" class="s">then ExpireRequest</text>
+<text x="120.0" y="400" text-anchor="middle" class="s">(REJECTED)</text>
+<rect x="640" y="190" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="735.0" y="218" text-anchor="middle" class="t">api Lambda</text>
+<text x="735.0" y="240" text-anchor="middle" class="s">SendTaskSuccess</text>
+<rect x="640" y="330" width="190" height="68" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="735.0" y="358" text-anchor="middle" class="t">Manager</text>
+<text x="735.0" y="380" text-anchor="middle" class="s">POST .../decision</text>
+<path d="M 210 64.0 L 330 64.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 520 64.0 L 640 64.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 425.0 98 L 425.0 190" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 330 224.0 L 210 224.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 640 224.0 L 520 224.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 735.0 330 L 735.0 258" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 455.0 258 L 455.0 330" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 355.0 258 L 355.0 294.0 L 120.0 294.0 L 120.0 330" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<rect x="563.8" y="53.0" width="32.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="580.0" y="69.0" text-anchor="middle" class="a">yes</text>
+<rect x="434.5" y="133.0" width="25.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="447.0" y="149.0" text-anchor="middle" class="a">no</text>
+<rect x="246.2" y="213.0" width="47.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="270.0" y="229.0" text-anchor="middle" class="a">token</text>
+<rect x="548.8" y="213.0" width="62.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="580.0" y="229.0" text-anchor="middle" class="a">resumes</text>
+<rect x="472.0" y="283.0" width="70.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="507.0" y="299.0" text-anchor="middle" class="a">decision</text>
+<rect x="206.2" y="283.0" width="62.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="237.5" y="299.0" text-anchor="middle" class="a">timeout</text>
+</svg>

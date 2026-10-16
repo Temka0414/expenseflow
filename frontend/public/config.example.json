@@ -1,0 +1,25 @@
+{
+  "region": "ap-northeast-1",
+  "stage": "dev",
+  "userPoolId": "ap-northeast-1_EXAMPLE00",
+  "userPoolClientId": "exampleclientid0000000000",
+  "apiUrl": "https://abc123defg.execute-api.ap-northeast-1.amazonaws.com",
+  "wsUrl": "wss://hij456klmn.execute-api.ap-northeast-1.amazonaws.com/live",
+  "maxReceiptBytes": 3500000,
+  "defaultCurrency": "JPY",
+  "autoApproveLimit": 5000,
+  "extractionEnabled": true,
+  "console": {
+    "tableName": "ExpenseFlow-Dev-Data-Table1A2B3C4D-EXAMPLE",
+    "receiptsBucket": "expenseflow-dev-data-receiptsbucket-example",
+    "reportsBucket": "expenseflow-dev-data-reportsbucket-example",
+    "eventBusName": "ExpenseFlowDevBackendEventBusEXAMPLE",
+    "approvalStateMachineArn": "arn:aws:states:ap-northeast-1:123456789012:stateMachine:ApprovalWorkflowEXAMPLE",
+    "receiptStateMachineArn": "arn:aws:states:ap-northeast-1:123456789012:stateMachine:ReceiptPipelineEXAMPLE",
+    "dashboardName": "ExpenseFlow-dev",
+    "httpApiId": "abc123defg",
+    "webSocketApiId": "hij456klmn",
+    "userPoolId": "ap-northeast-1_EXAMPLE00",
+    "distributionId": "E1EXAMPLE2345"
+  }
+}

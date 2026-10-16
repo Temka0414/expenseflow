@@ -1,0 +1,50 @@
+# Backend (Lambda code) project: the shared `expenseflow` library + the Lambda `handlers`.
+# It is not packaged/installed: CDK ships `src/` as the Lambda code asset and `requirements.txt` as a layer.
+# This file only carries metadata and the tool configuration (ruff, pytest, mypy).
+# Run every tool from this folder:  python -m pytest -q | python -m ruff check src tests | python -m mypy
+
+[project]
+name = "expenseflow-backend"
+version = "0.1.0"
+description = "ExpenseFlow serverless backend: shared library and AWS Lambda handlers"
+requires-python = ">=3.13"
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+# First-party detection for import sorting: `expenseflow`/`handlers` live in src/, `tests` in this folder.
+src = ["src", "."]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade (modern syntax for the target version)
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific rules
+    "C4",   # flake8-comprehensions
+    "PT",   # flake8-pytest-style
+]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra -p no:cacheprovider"
+filterwarnings = [
+    # Handlers decorated with Powertools `log_metrics` warn when an invocation emitted no metric; that is expected.
+    "ignore:No application metrics to publish:UserWarning",
+]
+
+[tool.mypy]
+python_version = "3.13"
+mypy_path = "src"
+packages = ["expenseflow", "handlers"]
+disallow_untyped_defs = true
+ignore_missing_imports = true  # boto3/botocore ship no type information (no boto3-stubs in the layer)
+warn_unused_ignores = true
+warn_redundant_casts = true

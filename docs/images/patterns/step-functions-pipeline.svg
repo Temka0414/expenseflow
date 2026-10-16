@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 530" width="860" height="530" role="img" aria-label="ReceiptPipeline state machine: attach the upload, extract with Claude, save the result or the failure">
+<title>ReceiptPipeline state machine: attach the upload, extract with Claude, save the result or the failure</title>
+<style>.t{font:700 15px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.s{font:14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#334155}.m{font:14px ui-monospace, 'Cascadia Mono', Consolas, 'SFMono-Regular', Menlo, monospace;fill:#334155}.a{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#1e293b}.g{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#64748b}.h{font:700 17px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.b{font:700 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#ffffff}</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<rect width="860" height="530" fill="#ffffff"/>
+<rect x="20" y="30" width="200" height="88" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="120.0" y="58" text-anchor="middle" class="t">ParseKey</text>
+<text x="120.0" y="80" text-anchor="middle" class="s">owner and expense id</text>
+<text x="120.0" y="100" text-anchor="middle" class="s">from the S3 key</text>
+<rect x="290" y="30" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="390.0" y="58" text-anchor="middle" class="t">MarkProcessing</text>
+<text x="390.0" y="80" text-anchor="middle" class="s">conditional update</text>
+<rect x="560" y="30" width="180" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="650.0" y="58" text-anchor="middle" class="t">HasOldReceipt?</text>
+<text x="650.0" y="80" text-anchor="middle" class="s">Choice</text>
+<rect x="290" y="160" width="200" height="68" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="390.0" y="188" text-anchor="middle" class="t">IgnoreUpload</text>
+<text x="390.0" y="210" text-anchor="middle" class="s">condition failed</text>
+<rect x="560" y="160" width="180" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="650.0" y="188" text-anchor="middle" class="t">DeleteOldReceipt</text>
+<text x="650.0" y="210" text-anchor="middle" class="s">best effort</text>
+<rect x="560" y="290" width="180" height="68" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="650.0" y="318" text-anchor="middle" class="t">ExtractReceipt</text>
+<text x="650.0" y="340" text-anchor="middle" class="s">Lambda + Bedrock</text>
+<rect x="290" y="290" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="390.0" y="318" text-anchor="middle" class="t">SaveExtraction</text>
+<text x="390.0" y="340" text-anchor="middle" class="s">status SUCCEEDED</text>
+<rect x="20" y="290" width="120" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="80.0" y="317.0" text-anchor="middle" class="t">Done</text>
+<rect x="290" y="420" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="390.0" y="448" text-anchor="middle" class="t">MarkFailed</text>
+<text x="390.0" y="470" text-anchor="middle" class="s">status FAILED</text>
+<rect x="20" y="420" width="200" height="44" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="120.0" y="447.0" text-anchor="middle" class="t">ExtractionFailed</text>
+<rect x="20" y="160" width="250" height="88" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="145.0" y="188" text-anchor="middle" class="t">Retries on ExtractReceipt</text>
+<text x="145.0" y="210" text-anchor="middle" class="s">ModelThrottledError: 5x</text>
+<text x="145.0" y="230" text-anchor="middle" class="s">ModelUnavailableError: 3x</text>
+<path d="M 220 64.0 L 290 64.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 490 64.0 L 560 64.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 390.0 98 L 390.0 160" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<path d="M 650.0 98 L 650.0 160" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 650.0 228 L 650.0 290" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 740 64.0 L 800 52 L 800 312 L 740 324.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 560 324.0 L 490 324.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 290 312.0 L 140 312.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 610.0 358 L 610.0 454.0 L 490 454.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 290 442.0 L 220 442.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="401.0" y="118.0" width="70.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="436.0" y="134.0" text-anchor="middle" class="a">no match</text>
+<rect x="655.8" y="118.0" width="32.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="672.0" y="134.0" text-anchor="middle" class="a">yes</text>
+<rect x="787.5" y="171.0" width="25.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="800.0" y="187.0" text-anchor="middle" class="a">no</text>
+<rect x="512.5" y="313.0" width="25.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="525.0" y="329.0" text-anchor="middle" class="a">ok</text>
+<rect x="526.2" y="443.0" width="47.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="550.0" y="459.0" text-anchor="middle" class="a">error</text>
+</svg>

@@ -1,0 +1,26 @@
+# Let Git normalize line endings: text files are stored with LF in the repository
+# and converted on checkout according to each developer's core.autocrlf setting.
+* text=auto
+
+# Shell scripts must keep LF everywhere (bash on Linux CI fails on "\r").
+*.sh text eol=lf
+
+# PowerShell / cmd scripts keep CRLF so Windows tooling never sees mixed endings.
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.psd1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary files: never convert line endings, never attempt a text diff.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.zip binary
+
+# Lockfiles are machine-written: collapse them in GitHub diffs (still reviewable).
+package-lock.json linguist-generated=true

@@ -1,0 +1,3 @@
+# The helper scripts follow the backend's lint and format rules; `_common` is a first-party module here.
+extend = "../backend/pyproject.toml"
+src = ["."]

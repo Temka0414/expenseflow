@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 584" width="1080" height="584" role="img" aria-labelledby="t d">
+  <title id="t">How the ExpenseFlow docs fit together</title>
+  <desc id="d">Three tracks: the reusable playbook, the ExpenseFlow deploy guide that applies it, and the patterns that explain what gets deployed. Below them, five levels give the reading order: core, AI receipts, workflow, realtime and production. A portfolio guide covers the GitHub workflow.</desc>
+  <style>
+    text { font-family: "Segoe UI", Helvetica, Arial, sans-serif; fill: #1e293b; }
+    .box { stroke-width: 2; }
+    .box.indigo { fill: #eef2ff; stroke: #4f46e5; }
+    .box.amber { fill: #fff7ed; stroke: #c2410c; }
+    .box.slate { fill: #f8fafc; stroke: #64748b; }
+    .head { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 17px; font-weight: 700; }
+    .t { font-size: 17px; font-weight: 700; }
+    .lvl { font-size: 14px; font-weight: 700; fill: #4f46e5; }
+    .s { font-size: 14px; fill: #334155; }
+    .m { font-size: 14px; fill: #475569; font-family: Consolas, "Courier New", monospace; }
+    .arrow { stroke: #64748b; stroke-width: 2; }
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1080" height="584" fill="#ffffff"/>
+  <text class="head" x="20" y="38">How the docs fit together</text>
+  <rect class="box indigo" x="20" y="64" width="280" height="104" rx="14"/>
+  <text class="t" x="160" y="96" text-anchor="middle">Playbook</text>
+  <text class="s" x="160" y="124" text-anchor="middle">The process, the same for every app</text>
+  <text class="m" x="160" y="150" text-anchor="middle">docs/playbook/ (10 phases)</text>
+  <rect class="box slate" x="400" y="64" width="280" height="104" rx="14"/>
+  <text class="t" x="540" y="96" text-anchor="middle">ExpenseFlow deploy guide</text>
+  <text class="s" x="540" y="124" text-anchor="middle">The playbook applied to this app</text>
+  <text class="m" x="540" y="150" text-anchor="middle">docs/expenseflow/deploy.md</text>
+  <rect class="box amber" x="780" y="64" width="280" height="104" rx="14"/>
+  <text class="t" x="920" y="96" text-anchor="middle">Patterns</text>
+  <text class="s" x="920" y="124" text-anchor="middle">One AWS building block per page</text>
+  <text class="m" x="920" y="150" text-anchor="middle">docs/patterns/ (13 pages)</text>
+  <line class="arrow" x1="304" y1="116" x2="396" y2="116" marker-end="url(#head)"/>
+  <text class="s" x="350" y="106" text-anchor="middle">used in</text>
+  <line class="arrow" x1="776" y1="116" x2="684" y2="116" marker-end="url(#head)"/>
+  <text class="s" x="730" y="106" text-anchor="middle">explains</text>
+  <text class="h2" x="20" y="214" text-anchor="start">Suggested reading order: five levels</text>
+  <rect class="box indigo" x="15" y="232" width="190" height="190" rx="14"/>
+  <text class="lvl" x="110" y="258" text-anchor="middle">Level 1</text>
+  <text class="t" x="110" y="282" text-anchor="middle">Core</text>
+  <text class="s" x="110" y="310" text-anchor="middle">Cognito, API Gateway</text>
+  <text class="s" x="110" y="331" text-anchor="middle">Lambda, DynamoDB</text>
+  <text class="s" x="110" y="352" text-anchor="middle">S3, CloudFront</text>
+  <text class="s" x="110" y="373" text-anchor="middle">CDK, IAM</text>
+  <text class="m" x="110" y="410" text-anchor="middle">patterns 01-05</text>
+  <line class="arrow" x1="208" y1="327" x2="227" y2="327" marker-end="url(#head)"/>
+  <rect class="box indigo" x="230" y="232" width="190" height="190" rx="14"/>
+  <text class="lvl" x="325" y="258" text-anchor="middle">Level 2</text>
+  <text class="t" x="325" y="282" text-anchor="middle">AI receipts</text>
+  <text class="s" x="325" y="310" text-anchor="middle">Bedrock (Claude)</text>
+  <text class="s" x="325" y="331" text-anchor="middle">Step Functions</text>
+  <text class="s" x="325" y="352" text-anchor="middle">S3 events</text>
+  <text class="m" x="325" y="410" text-anchor="middle">patterns 06-07</text>
+  <line class="arrow" x1="423" y1="327" x2="442" y2="327" marker-end="url(#head)"/>
+  <rect class="box indigo" x="445" y="232" width="190" height="190" rx="14"/>
+  <text class="lvl" x="540" y="258" text-anchor="middle">Level 3</text>
+  <text class="t" x="540" y="282" text-anchor="middle">Workflow</text>
+  <text class="s" x="540" y="310" text-anchor="middle">Task-token approvals</text>
+  <text class="s" x="540" y="331" text-anchor="middle">EventBridge outbox</text>
+  <text class="s" x="540" y="352" text-anchor="middle">SQS, DLQ</text>
+  <text class="s" x="540" y="373" text-anchor="middle">Idempotency</text>
+  <text class="m" x="540" y="410" text-anchor="middle">patterns 08-10</text>
+  <line class="arrow" x1="638" y1="327" x2="657" y2="327" marker-end="url(#head)"/>
+  <rect class="box indigo" x="660" y="232" width="190" height="190" rx="14"/>
+  <text class="lvl" x="755" y="258" text-anchor="middle">Level 4</text>
+  <text class="t" x="755" y="282" text-anchor="middle">Realtime</text>
+  <text class="s" x="755" y="310" text-anchor="middle">WebSockets</text>
+  <text class="s" x="755" y="331" text-anchor="middle">Live push to the UI</text>
+  <text class="m" x="755" y="410" text-anchor="middle">pattern 11</text>
+  <line class="arrow" x1="853" y1="327" x2="872" y2="327" marker-end="url(#head)"/>
+  <rect class="box indigo" x="875" y="232" width="190" height="190" rx="14"/>
+  <text class="lvl" x="970" y="258" text-anchor="middle">Level 5</text>
+  <text class="t" x="970" y="282" text-anchor="middle">Production</text>
+  <text class="s" x="970" y="310" text-anchor="middle">Scheduler</text>
+  <text class="s" x="970" y="331" text-anchor="middle">Observability</text>
+  <text class="s" x="970" y="352" text-anchor="middle">CI/CD, security</text>
+  <text class="s" x="970" y="373" text-anchor="middle">Cost</text>
+  <text class="m" x="970" y="410" text-anchor="middle">patterns 12-13</text>
+  <rect class="box slate" x="20" y="442" width="1040" height="52" rx="14"/>
+  <text class="s" x="540" y="465" text-anchor="middle">Start with playbook 01-07 and the deploy guide: they put the whole app into your AWS account.</text>
+  <text class="s" x="540" y="485" text-anchor="middle">Then read the patterns by level, and finish with playbook 08-10 (operate, CI/CD, prod).</text>
+  <rect class="box amber" x="20" y="508" width="1040" height="52" rx="14"/>
+  <text class="s" x="540" y="531" text-anchor="middle">Portfolio (docs/portfolio/github.md): for each lesson one GitHub issue, one pull request,</text>
+  <text class="s" x="540" y="551" text-anchor="middle">one LEARNING_LOG.md entry. At the end, write the article for Zenn or Qiita.</text>
+</svg>

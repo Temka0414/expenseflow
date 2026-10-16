@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 410" width="860" height="410" role="img" aria-label="WebSocket API: authorize on connect, store connections in DynamoDB, push events to the right audience">
+<title>WebSocket API: authorize on connect, store connections in DynamoDB, push events to the right audience</title>
+<style>.t{font:700 15px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.s{font:14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#334155}.m{font:14px ui-monospace, 'Cascadia Mono', Consolas, 'SFMono-Regular', Menlo, monospace;fill:#334155}.a{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#1e293b}.g{font:600 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#64748b}.h{font:700 17px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#0f172a}.b{font:700 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;fill:#ffffff}</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<rect width="860" height="410" fill="#ffffff"/>
+<rect x="20" y="30" width="170" height="68" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text x="105.0" y="58" text-anchor="middle" class="t">Browser</text>
+<text x="105.0" y="80" text-anchor="middle" class="s">wss + access token</text>
+<rect x="320" y="30" width="190" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="415.0" y="58" text-anchor="middle" class="t">WebSocket API</text>
+<text x="415.0" y="80" text-anchor="middle" class="s">stage: live</text>
+<rect x="640" y="30" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="740.0" y="58" text-anchor="middle" class="t">ws_authorizer</text>
+<text x="740.0" y="80" text-anchor="middle" class="s">Cognito GetUser</text>
+<rect x="640" y="170" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="740.0" y="198" text-anchor="middle" class="t">ws_connections</text>
+<text x="740.0" y="220" text-anchor="middle" class="s">$connect, $disconnect</text>
+<rect x="640" y="310" width="200" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="740.0" y="338" text-anchor="middle" class="t">DynamoDB</text>
+<text x="740.0" y="360" text-anchor="middle" class="s">WSCONN#&lt;id&gt;, TTL 2 h</text>
+<rect x="320" y="310" width="190" height="68" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="415.0" y="338" text-anchor="middle" class="t">realtime_push</text>
+<text x="415.0" y="360" text-anchor="middle" class="s">post_to_connection</text>
+<rect x="20" y="310" width="170" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="105.0" y="338" text-anchor="middle" class="t">Event bus</text>
+<text x="105.0" y="360" text-anchor="middle" class="s">rule</text>
+<path d="M 190 52.0 L 320 52.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 320 76.0 L 190 76.0" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<path d="M 510 64.0 L 640 64.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 455.0 98 L 455.0 204.0 L 640 204.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 740.0 238 L 740.0 310" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 190 344.0 L 320 344.0" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+<path d="M 510 344.0 L 640 344.0" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 375.0 310 L 375.0 98" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="223.8" y="39.0" width="62.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="255.0" y="55.0" text-anchor="middle" class="a">connect</text>
+<rect x="227.5" y="69.0" width="55.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="255.0" y="85.0" text-anchor="middle" class="a">events</text>
+<rect x="540.0" y="53.0" width="70.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="575.0" y="69.0" text-anchor="middle" class="a">$connect</text>
+<rect x="520.0" y="193.0" width="55.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="547.5" y="209.0" text-anchor="middle" class="a">routes</text>
+<rect x="760.0" y="263.0" width="40.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="780.0" y="279.0" text-anchor="middle" class="a">save</text>
+<rect x="201.2" y="333.0" width="107.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="255.0" y="349.0" text-anchor="middle" class="a">domain events</text>
+<rect x="521.2" y="333.0" width="107.5" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="575.0" y="349.0" text-anchor="middle" class="a">find audience</text>
+<rect x="377.0" y="193.0" width="40.0" height="22" rx="4" fill="#ffffff" fill-opacity="0.94"/>
+<text x="397.0" y="209.0" text-anchor="middle" class="a">send</text>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "name": "expenseflow-infra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pins the AWS CDK CLI used to synthesize and deploy the ExpenseFlow CDK app (the app itself is Python).",
+  "license": "UNLICENSED",
+  "scripts": {
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1143.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

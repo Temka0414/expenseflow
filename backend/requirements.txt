@@ -1,0 +1,13 @@
+# Runtime dependencies for the shared Lambda LAYER (infra DependenciesLayer installs them for linux/arm64,
+# Python 3.13, binary wheels only). Pin exact versions: a layer must be reproducible build after build.
+#
+# Why boto3/botocore ARE pinned here even though every Lambda Python runtime ships them:
+# Powertools' [tracer] extra depends on aws-xray-sdk, which pulls in botocore. Lambda puts layer packages
+# BEFORE the runtime's own ones on sys.path, so that botocore would silently replace the runtime's copy and could
+# mismatch the runtime's boto3. Pinning a matching boto3 + botocore pair keeps the SDK consistent and also means
+# an AWS runtime update can never change SDK behavior under you (what AWS recommends for production code).
+aws-lambda-powertools[tracer,parser]==3.35.0
+anthropic==1.13.0
+pydantic==2.14.1
+boto3==1.43.112
+botocore==1.43.112

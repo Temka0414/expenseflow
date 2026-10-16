@@ -1,0 +1,17 @@
+# Local development and CI: the layer's runtime deps plus everything the Lambda runtime normally provides,
+# the AWS mocks and the toolchain. Exact pins keep CI and every laptop on the same versions.
+-r requirements.txt
+
+# The `bedrock` extra adds boto3/botocore for SigV4 signing (provided by the Lambda runtime in AWS).
+anthropic[bedrock]==1.13.0
+boto3==1.43.112
+
+# moto: in-memory AWS for unit tests. Only the extras of the services the tests touch:
+# DynamoDB, S3, EventBridge, SQS (event sink), Cognito (real JWTs), SSM, Step Functions, SES (sesv2 shares it),
+# IAM (roles for the fake function/state machine) and the Docker-free Lambda backend (async `invoke`).
+# The API Gateway Management API needs no extra.
+moto[awslambda-simple,cognitoidp,dynamodb,events,iam,s3,ses,sqs,ssm,stepfunctions]==5.2.4
+
+pytest==9.1.1
+ruff==0.17.0
+mypy==2.4.0
