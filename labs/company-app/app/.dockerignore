@@ -1,0 +1,9 @@
+# Keep local build output out of the image build: obj/ holds your PC's (Windows) restore results,
+# which would confuse the restore inside the Linux build container. It also keeps the upload to
+# Docker small, and CDK does not rebuild the image just because you built the app locally.
+bin/
+obj/
+.vs/
+*.user
+Dockerfile
+.dockerignore

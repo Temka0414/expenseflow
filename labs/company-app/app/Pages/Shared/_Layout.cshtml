@@ -1,0 +1,24 @@
+@inject IConfiguration Configuration
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Company App</title>
+    <link rel="stylesheet" href="~/site.css" />
+</head>
+<body>
+    <header>
+        <a asp-page="/Index" class="brand">Company App</a>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    @* Reload the page with two containers running: the load balancer sends each request to one
+       of them, so the container name changes while the database host stays the same. *@
+    <footer>
+        <span>Served by container: @Environment.MachineName</span>
+        <span>Database host: @Configuration["DB_HOST"]</span>
+    </footer>
+</body>
+</html>

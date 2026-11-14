@@ -1,0 +1,5 @@
+# CDK app dependencies, pinned exactly (the same versions as the main infra/ app).
+# Install them into a virtualenv and keep it ACTIVATED when running `npx cdk ...`:
+# cdk.json runs plain `python app.py`, i.e. whichever python is first on PATH.
+aws-cdk-lib==2.273.0
+constructs==10.8.1
