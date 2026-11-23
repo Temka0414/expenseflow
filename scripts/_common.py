@@ -108,6 +108,12 @@ def run_script(main: Callable[[], int]) -> NoReturn:
             message += f"\n{_SIGN_IN_HINT}"
     except BotoCoreError as exc:  # no credentials, unknown profile, expired SSO session, no network, ...
         message = f"{exc}\n{_SIGN_IN_HINT}"
+    except RuntimeError as exc:
+        # botocore raises a plain RuntimeError when temporary credentials (e.g. ones exported into the
+        # shell with `aws configure export-credentials`) have expired and cannot be refreshed.
+        if "expired" not in str(exc).lower():
+            raise
+        message = f"Your temporary AWS credentials have expired.\n{_SIGN_IN_HINT}"
     except KeyboardInterrupt:
         message = "Interrupted."
     print(f"\nERROR: {message}", file=sys.stderr, flush=True)

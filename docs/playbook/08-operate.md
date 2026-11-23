@@ -37,7 +37,7 @@ aws cloudwatch describe-alarms --alarm-name-prefix ExpenseFlow-Dev --query "Metr
 aws cloudwatch set-alarm-state --alarm-name <one-alarm-name> --state-value ALARM --state-reason "Testing the alarm email"
 ```
 
-The email arrives within a minute. CloudWatch sets the alarm back to its real state at the next check, so this is safe.
+Pick an alarm that is `OK`: an alarm acts only when its state **changes**, so forcing `ALARM` on one that is already in `ALARM` sends nothing. The email arrives within a minute, and the alarm's **History** tab shows `Successfully executed action arn:aws:sns:...`. CloudWatch sets the alarm back to its real state at the next check, so this is safe.
 
 **In ExpenseFlow:** every alarm uses the same SNS topic, so one email address hears all of them.
 
@@ -104,6 +104,8 @@ Pinned versions do not update themselves. Once a month, check GitHub **Dependabo
 | Problem | Fix |
 |---|---|
 | Alarm fires but no email | The subscription is not confirmed (look for the email, check spam), or the topic has no subscriber because `alarmEmail` was not set. |
+| Alarm **History** says `CloudWatch Alarms is not authorized to perform: SNS:Publish` | The topic policy has no Allow for CloudWatch. A TLS-only topic policy *replaces* SNS's default policy, so it must allow `cloudwatch.amazonaws.com` explicitly. ExpenseFlow did this wrong at first; the fix is in `monitoring.py`: redeploy. |
+| No email after redeploying with `alarmEmail` | Alarms notify only on a state change, and failed notifications are not retried. Confirm the subscription, then test with an alarm that is `OK` (step 2). |
 | Alarm stays in `Insufficient data` | Normal for a new system with no traffic. ExpenseFlow treats missing data as "not breaching", so it should turn `OK`. |
 | Cost Explorer is empty | It needs up to 24 hours after you enable it. |
 | The bill is higher than expected | Group by Service. Look for CloudWatch (logs, dashboards, alarms), Bedrock, or a forgotten resource in another Region. |

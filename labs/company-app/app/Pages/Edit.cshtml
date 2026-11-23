@@ -1,0 +1,39 @@
+@page "{id:int}"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit asset";
+}
+
+<h1>Edit asset</h1>
+
+<form method="post">
+    <div class="field">
+        <label asp-for="Asset.Name"></label>
+        <input asp-for="Asset.Name" />
+        <span asp-validation-for="Asset.Name" class="error"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Asset.Category"></label>
+        <input asp-for="Asset.Category" />
+        <span asp-validation-for="Asset.Category" class="error"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Asset.SerialNumber"></label>
+        <input asp-for="Asset.SerialNumber" />
+        <span asp-validation-for="Asset.SerialNumber" class="error"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Asset.AssignedTo"></label>
+        <input asp-for="Asset.AssignedTo" />
+        <span asp-validation-for="Asset.AssignedTo" class="error"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Asset.PurchasedOn"></label>
+        <input asp-for="Asset.PurchasedOn" type="date" />
+        <span asp-validation-for="Asset.PurchasedOn" class="error"></span>
+    </div>
+    <div class="actions">
+        <button type="submit">Save</button>
+        <a asp-page="Index">Cancel</a>
+    </div>
+</form>

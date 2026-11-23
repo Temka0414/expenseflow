@@ -1,0 +1,40 @@
+# Runs the app and its PostgreSQL database on your PC:
+#   docker compose up --build      then open http://localhost:8080
+# On AWS the same app image runs on ECS Fargate, and Amazon RDS takes the place of `db`.
+services:
+  db:
+    image: postgres:17
+    environment:
+      # Local-only credentials. On AWS the password is generated and kept in Secrets Manager.
+      POSTGRES_DB: companyapp
+      POSTGRES_USER: companyapp
+      POSTGRES_PASSWORD: companyapp
+    volumes:
+      # The data survives `docker compose down`; `docker compose down -v` deletes it.
+      - pgdata:/var/lib/postgresql/data
+    # No `ports:`: only the app talks to the database, like RDS in its private subnets on AWS.
+    healthcheck:
+      # The app migrates the database at startup, so it must wait until PostgreSQL accepts
+      # connections. `-h localhost` checks over TCP: during its first-time setup PostgreSQL runs
+      # briefly without TCP, and a plain pg_isready would report it ready too early.
+      test: ["CMD", "pg_isready", "-h", "localhost", "-U", "companyapp", "-d", "companyapp"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  app:
+    build: ./app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: companyapp
+      DB_USER: companyapp
+      DB_PASSWORD: companyapp
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

@@ -12,11 +12,12 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Final
 
-from aws_cdk import Duration
+from aws_cdk import ArnFormat, Duration, Stack
 from aws_cdk import aws_apigatewayv2 as apigwv2
 from aws_cdk import aws_cloudwatch as cw
 from aws_cdk import aws_cloudwatch_actions as cw_actions
 from aws_cdk import aws_dynamodb as dynamodb
+from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_sns as sns
 from aws_cdk import aws_sns_subscriptions as subscriptions
@@ -105,6 +106,31 @@ class Monitoring(Construct):
             display_name=f"{PROJECT_NAME} {config.stage} alarms",
             # Deny publishing over plain HTTP (cdk-nag SNS3).
             enforce_ssl=True,
+        )
+        # `enforce_ssl` attaches a topic policy, and a topic policy REPLACES SNS's default policy (the one
+        # that lets anything in this account publish). Without this Allow, every alarm fails with
+        # "CloudWatch Alarms is not authorized to perform: SNS:Publish" - visible only in the alarm's
+        # History tab - and no email ever arrives. The conditions stop alarms in other accounts from
+        # using this topic (confused-deputy protection).
+        stack = Stack.of(self)
+        self.topic.add_to_resource_policy(
+            iam.PolicyStatement(
+                sid="AllowCloudWatchAlarmsToPublish",
+                principals=[iam.ServicePrincipal("cloudwatch.amazonaws.com")],
+                actions=["sns:Publish"],
+                resources=[self.topic.topic_arn],
+                conditions={
+                    "StringEquals": {"aws:SourceAccount": stack.account},
+                    "ArnLike": {
+                        "aws:SourceArn": stack.format_arn(
+                            service="cloudwatch",
+                            resource="alarm",
+                            resource_name="*",
+                            arn_format=ArnFormat.COLON_RESOURCE_NAME,
+                        )
+                    },
+                },
+            )
         )
         acknowledge(
             self.topic,

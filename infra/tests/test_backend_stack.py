@@ -697,6 +697,32 @@ def test_alarms_notify_the_alarm_topic(template: Template) -> None:
     template.resource_count_is("AWS::SNS::Subscription", 0)
 
 
+def test_cloudwatch_alarms_may_publish_to_the_alarm_topic(template: Template) -> None:
+    # The TLS-only topic policy replaces SNS's default policy, so CloudWatch needs an explicit Allow:
+    # without it every alarm action fails with "not authorized to perform: SNS:Publish"
+    # (found by testing an alarm in a real account).
+    topic = _logical_id(template.find_resources("AWS::SNS::Topic"), "MonitoringAlarmTopic")
+    policies = [
+        policy
+        for policy in template.find_resources("AWS::SNS::TopicPolicy").values()
+        if policy["Properties"]["Topics"] == [{"Ref": topic}]
+    ]
+    assert len(policies) == 1
+    statements = {s["Sid"]: s for s in policies[0]["Properties"]["PolicyDocument"]["Statement"]}
+
+    assert statements["AllowPublishThroughSSLOnly"]["Effect"] == "Deny"
+    allow = statements["AllowCloudWatchAlarmsToPublish"]
+    assert allow["Effect"] == "Allow"
+    assert allow["Principal"] == {"Service": "cloudwatch.amazonaws.com"}
+    assert allow["Action"] == "sns:Publish"
+    assert allow["Resource"] == {"Ref": topic}
+    # Only alarms in this account and Region (confused-deputy protection).
+    assert allow["Condition"]["StringEquals"] == {"aws:SourceAccount": TEST_ACCOUNT}
+    assert allow["Condition"]["ArnLike"] == {
+        "aws:SourceArn": f"arn:aws:cloudwatch:{TEST_REGION}:{TEST_ACCOUNT}:alarm:*"
+    }
+
+
 def test_optional_emails(make_app: AppFactory, assert_nag_clean: NagCheck) -> None:
     stack = _backend(make_app(alarmEmail="ops@example.com", senderEmail="noreply@example.com"))
     template = Template.from_stack(stack)

@@ -1,0 +1,46 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "IT equipment";
+}
+
+<div class="title-row">
+    <h1>IT equipment</h1>
+    <a asp-page="Create" class="button">Add asset</a>
+</div>
+
+@if (Model.Assets.Count == 0)
+{
+    <p>No assets yet.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Serial number</th>
+                <th>Assigned to</th>
+                <th>Purchased on</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var asset in Model.Assets)
+            {
+                <tr>
+                    <td>@asset.Name</td>
+                    <td>@asset.Category</td>
+                    <td>@asset.SerialNumber</td>
+                    <td>@asset.AssignedTo</td>
+                    <td>@asset.PurchasedOn?.ToString("yyyy-MM-dd")</td>
+                    <td class="actions">
+                        <a asp-page="Edit" asp-route-id="@asset.Id">Edit</a>
+                        <a asp-page="Delete" asp-route-id="@asset.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

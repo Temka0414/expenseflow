@@ -1,0 +1,6 @@
+# Output of dotnet build, test and publish. The repository-wide .gitignore already covers .vs/,
+# node_modules/ and cdk.out/.
+bin/
+obj/
+TestResults/
+*.user

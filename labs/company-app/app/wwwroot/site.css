@@ -1,0 +1,59 @@
+/* One small hand-written stylesheet instead of the template's Bootstrap: nothing to download. */
+:root {
+  --text: #1f2933;
+  --muted: #616e7c;
+  --line: #d9dee3;
+  --accent: #2f5fd0;
+  --danger: #c0392b;
+  --error: #b42318;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
+body { margin: 0; background: #fff; }
+header { padding: 12px 24px; background: var(--accent); }
+header .brand { color: #fff; font-weight: 600; text-decoration: none; }
+main { max-width: 960px; margin: 0 auto; padding: 16px 24px 48px; }
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 12px 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+a { color: var(--accent); }
+h1 { font-size: 1.5rem; }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; }
+th { color: var(--muted); font-weight: 600; }
+td.actions { white-space: nowrap; }
+td.actions a + a { margin-left: 12px; }
+
+.field { display: flex; flex-direction: column; gap: 4px; max-width: 400px; margin-bottom: 16px; }
+label { font-weight: 600; }
+input { padding: 6px 8px; border: 1px solid var(--line); border-radius: 4px; font: inherit; }
+.error { color: var(--error); font-size: 0.9rem; }
+.input-validation-error { border-color: var(--error); }
+
+div.actions { display: flex; align-items: center; gap: 16px; }
+button, .button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+button.danger { background: var(--danger); }
+
+/* Small screens: let the table scroll sideways instead of squeezing the columns. */
+@media (max-width: 640px) {
+  table { display: block; overflow-x: auto; }
+}
