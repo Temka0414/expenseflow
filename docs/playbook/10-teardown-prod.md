@@ -12,6 +12,8 @@ Cloud bills come from things you forgot. **Teardown** is the last step of a lear
 
 ### 1. Tear down a stage
 
+**First, if GitHub Actions deploys this project** ([phase 9](09-cicd.md)): delete the repository variable `AWS_REGION` (**Settings > Secrets and variables > Actions > Variables**) before you destroy anything. It is the on switch. While it exists, the next merge to `main` deploys the whole stage again, and once the OIDC stack is gone every run fails at **Configure AWS credentials**.
+
 Run from the same folder and with the **same `-c` flags** you deployed with (the stack list depends on them):
 
 ```powershell
@@ -41,7 +43,7 @@ npx cdk destroy ExpenseFlow-GitHubOidc -c githubRepo=<your-github-user>/expensef
 | `CDKToolkit` stack and the `cdk-hnb659fds-assets-...` bucket | Shared by every CDK project in this account and Region | cents (uploaded Lambda packages) |
 | The API Gateway CloudWatch role | ExpenseFlow marks it `RETAIN`: the account setting may serve other APIs | none |
 | The Bedrock model subscription (AWS Marketplace) | Account-level, created by `check_bedrock.py` | none by itself; Bedrock bills per use |
-| The GitHub variables in your repository | They are in GitHub, not in AWS | none |
+| The GitHub secrets and variables in your repository (`AWS_DEPLOY_ROLE_ARN`, `AWS_DEPLOY_ROLE_ID`, `ALARM_EMAIL`, `STAGE`, `EXTRACTION_MODEL_ID`) | They are in GitHub, not in AWS. Delete them too (`AWS_REGION` is already gone, step 1) | none |
 
 To remove the bootstrap too (only if you will never use the CDK in this Region again): empty the assets bucket in the console, then delete the `CDKToolkit` stack in **CloudFormation**.
 
@@ -110,6 +112,7 @@ Before real users depend on an app, go through this list. For ExpenseFlow, the h
 
 ## 🔁 Repeat for every project
 
+- [ ] The CI/CD on switch (the `AWS_REGION` variable) deleted before the destroy
 - [ ] The exact destroy command is written in the project README
 - [ ] Optional account-wide stacks (budget, OIDC) are removed too
 - [ ] You know what stays behind and what it costs

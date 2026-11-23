@@ -85,7 +85,7 @@ Multiply the token counts by the prices of the Bedrock price page to get your ow
 .\scripts\deploy.ps1 -c extractionModelId=none
 ```
 
-The extraction function is not deployed. The ReceiptPipeline uses `MarkSkipped`, and the app says AI extraction is switched off for this deployment. (The Frontend stack is redeployed too, because `config.json` carries `extractionEnabled`.) Fix: deploy again without the `-c` option.
+The extraction function is not deployed. The ReceiptPipeline uses `MarkSkipped`, and the app says AI extraction is switched off for this deployment. (The Frontend stack is redeployed too, because `config.json` carries `extractionEnabled`.) Fix: deploy again without the `-c` option. If the GitHub deploy is switched on ([phase 9](../playbook/09-cicd.md)), also set the repository variable `EXTRACTION_MODEL_ID` to the model id (for example `au.anthropic.claude-opus-5-5` in Sydney). Otherwise the next merge to `main` deploys with `extractionModelId=none` and AI is off again.
 
 **What you learn**: a feature flag at deploy time changes the workflow graph, not just a variable. Failure modes (not a receipt, throttled, refused, off) all end in a state the user understands.
 

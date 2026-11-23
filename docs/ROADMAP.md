@@ -28,6 +28,6 @@
 - [x] **Week 3:** ExpenseFlow deployed to my own account (AI off); tour of DynamoDB, S3, Step Functions
 - [x] **Week 4:** core pieces, one per session — Cognito (login) → API Gateway + Lambda → DynamoDB → S3 uploads → CloudFront
 - [x] **Weeks 5–6:** a typical company app (ASP.NET + PostgreSQL) in containers — Docker on my PC → ECR → ECS Fargate + RDS; self-healing and two containers seen; lab destroyed
-- [ ] **Week 7:** monitoring + cost — read the bill → find errors in logs → an alarm that reaches me
+- [x] **Week 7:** monitoring + cost — read the bill → find errors in logs → an alarm that reaches me; found and fixed a real bug on the way (the alarm topic blocked CloudWatch, so no email ever went out)
 
 **Skip for now:** WebSockets, Step Functions and EventBridge details, Kubernetes, multi-account setups, and the other 200+ services.

@@ -20,7 +20,6 @@ from aws_cdk import aws_dynamodb as dynamodb
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_sns as sns
-from aws_cdk import aws_sns_subscriptions as subscriptions
 from aws_cdk import aws_sqs as sqs
 from aws_cdk import aws_stepfunctions as sfn
 from constructs import Construct
@@ -143,7 +142,16 @@ class Monitoring(Construct):
         )
         if config.alarm_email:
             # AWS emails a confirmation link first; no alarm mail arrives until it is clicked.
-            self.topic.add_subscription(subscriptions.EmailSubscription(config.alarm_email))
+            # A fixed construct id on purpose: `EmailSubscription` uses the address itself as the id, so
+            # the address (minus its punctuation) became the logical ID that `cdk deploy` prints in every
+            # CloudFormation event line - in a public repository's Actions log, too.
+            sns.Subscription(
+                self,
+                "AlarmEmailSubscription",
+                topic=self.topic,
+                protocol=sns.SubscriptionProtocol.EMAIL,
+                endpoint=config.alarm_email,
+            )
         self._action = cw_actions.SnsAction(self.topic)
 
         api_alarm = self._alarm(

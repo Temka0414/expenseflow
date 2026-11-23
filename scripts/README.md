@@ -51,8 +51,8 @@ Deploy another stage or pass other context with `-c`, for example `.\scripts\dep
 
 - `.github/workflows/ci.yml` runs on every push to `main` and every pull request: backend (ruff, mypy, pytest), these scripts (ruff, pytest), infrastructure (pytest and a real `cdk synth` with cdk-nag) and frontend (lint, tests, build). It needs no AWS access.
 - `.github/workflows/deploy.yml` deploys on every push to `main` (and by hand from the Actions tab) **without stored AWS keys**: GitHub proves who it is with an OIDC token, and AWS hands out temporary credentials. One-time setup:
-  1. From your PC: `cd infra; npx cdk deploy ExpenseFlow-GitHubOidc -c githubRepo=<owner>/<repo>`. The stack's `DeployRoleArn` output is the role the workflow assumes.
-  2. In the repository settings (Secrets and variables, Actions, **Variables**) add `AWS_DEPLOY_ROLE_ARN` (that output), `AWS_REGION` (the Region you bootstrapped and deployed to) and optionally `STAGE` (default `dev`).
+  1. From your PC: `cd infra; npx cdk deploy ExpenseFlow-GitHubOidc --exclusively -c githubRepo=<Owner>/<repo>` (owner and repository spelled exactly as on GitHub, case included). The stack's `DeployRoleArn` output is the role the workflow assumes.
+  2. In the repository settings (Secrets and variables, Actions) add the **secrets** `AWS_DEPLOY_ROLE_ARN` (that output; it contains your account ID) and `AWS_DEPLOY_ROLE_ID` (the `DeployRoleId` output), optionally the **secret** `ALARM_EMAIL` and the **variables** `STAGE` (default `dev`) and `EXTRACTION_MODEL_ID` (unset = AI off), and **last** the variable `AWS_REGION` (the Region you bootstrapped and deployed to), which switches the deploy on. Details: [phase 9](../docs/playbook/09-cicd.md), step 3.
 
 ## Tests
 

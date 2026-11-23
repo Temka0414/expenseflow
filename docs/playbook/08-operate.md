@@ -20,11 +20,13 @@ A CloudWatch **alarm** watches one metric. When it crosses a limit, it sends a m
 .\scripts\deploy.ps1 -c alarmEmail=you@example.com
 ```
 
+Add the flags you always deploy with, for example `-c extractionModelId=none` if AI is off. The CDK does not remember flags, and a deploy without that one turns AI receipt reading on.
+
 The Backend stack then creates alarms for HTTP API 5xx errors, Lambda errors, messages waiting in each dead-letter queue, and failed state machine executions. Each evaluates one 5-minute period, so a single failure notifies you.
 
 **Then open your inbox.** AWS sends a "Subscription Confirmation" email from AWS Notifications. **No alarm email arrives until you click Confirm subscription.**
 
-Without `-c alarmEmail=...` the alarms and the topic exist, but nobody is subscribed.
+Without `-c alarmEmail=...` the alarms and the topic exist, but nobody is subscribed, and a later deploy **without** the flag deletes the subscription again. So either pass the flag on every deploy, or subscribe once in the SNS console instead and never pass it. If GitHub Actions will deploy for you from a public repository, use the console way: [phase 9](09-cicd.md), step 3.
 
 <!-- screenshot: SNS > Topics > ExpenseFlow topic > Subscriptions (status Confirmed) -->
 
@@ -103,7 +105,7 @@ Pinned versions do not update themselves. Once a month, check GitHub **Dependabo
 
 | Problem | Fix |
 |---|---|
-| Alarm fires but no email | The subscription is not confirmed (look for the email, check spam), or the topic has no subscriber because `alarmEmail` was not set. |
+| Alarm fires but no email | The subscription is not confirmed (look for the email, check spam), or the topic has no subscriber (`alarmEmail` not set and no subscription made in the SNS console). |
 | Alarm **History** says `CloudWatch Alarms is not authorized to perform: SNS:Publish` | The topic policy has no Allow for CloudWatch. A TLS-only topic policy *replaces* SNS's default policy, so it must allow `cloudwatch.amazonaws.com` explicitly. ExpenseFlow did this wrong at first; the fix is in `monitoring.py`: redeploy. |
 | No email after redeploying with `alarmEmail` | Alarms notify only on a state change, and failed notifications are not retried. Confirm the subscription, then test with an alarm that is `OK` (step 2). |
 | Alarm stays in `Insufficient data` | Normal for a new system with no traffic. ExpenseFlow treats missing data as "not breaching", so it should turn `OK`. |

@@ -168,6 +168,8 @@ def test_deploy_role_can_only_assume_the_cdk_bootstrap_roles(make_app: AppFactor
     ]
     role_id = next(iter(template.find_resources("AWS::IAM::Role")))
     template.has_output("DeployRoleArn", {"Value": {"Fn::GetAtt": [role_id, "Arn"]}})
+    # Stored as a secret so deploy.yml can mask the "assumedRoleId AROA..." log line.
+    template.has_output("DeployRoleId", {"Value": {"Fn::GetAtt": [role_id, "RoleId"]}})
 
 
 def test_github_oidc_stack_requires_a_repository(make_app: AppFactory) -> None:

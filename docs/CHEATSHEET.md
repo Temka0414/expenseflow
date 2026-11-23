@@ -151,7 +151,7 @@ aws configure export-credentials --format powershell | Invoke-Expression
 
 | Command | What it does |
 |---|---|
-| `.\scripts\deploy.ps1 -c extractionModelId=none` | Deploy or update it, with AI off |
+| `.\scripts\deploy.ps1 -c extractionModelId=none` | Deploy or update it, with AI off. **Never** add `-c alarmEmail`: GitHub deploys without it too. My alarm e-mail is a console subscription. One-time (Week 8): deploy once like this, *then* SNS > Topics > alarm topic > Create subscription > Email, and click Confirm in the e-mail |
 | Delete it | See [Playbook 10](playbook/10-teardown-prod.md) |
 
 **What the words in the commands mean:**

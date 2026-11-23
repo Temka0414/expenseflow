@@ -171,6 +171,8 @@ def test_github_settings(make_app: AppFactory) -> None:
         ({"alarmEmail": "not-an-email"}, "-c alarmEmail="),
         ({"budgetEmail": ["a@example.com"]}, "-c budgetEmail:"),
         ({"githubRepo": "just-a-name"}, "-c githubRepo="),
+        ({"githubRepo": "octo-org@123/expenseflow"}, "-c githubRepo="),
+        ({"githubRepo": "octo-org/expenseflow@456"}, "-c githubRepo="),
         ({"githubOidcProviderArn": "arn:aws:iam::123456789012:oidc-provider/x"}, "githubRepo"),
     ],
 )

@@ -2,6 +2,7 @@
 # The site appears at https://<your-github-user>.github.io/<repo-name>/ and needs no AWS account.
 #
 # One-time setup: repository Settings > Pages > "Build and deployment" > Source: GitHub Actions.
+# Until then the deploy job fails with "Ensure GitHub Pages has been enabled"; after the setup, re-run it.
 name: Pages
 
 on:
@@ -11,8 +12,6 @@ on:
 
 permissions:
   contents: read
-  pages: write # lets deploy-pages publish the site
-  id-token: write # lets deploy-pages prove to GitHub that the deployment comes from this workflow
 
 concurrency:
   group: pages
@@ -45,6 +44,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # Only this job gets these rights, never the build job: `npm ci` runs third-party install scripts there,
+    # and a main-branch job with id-token: write and no `environment:` could obtain the AWS deploy role.
+    # This job's OIDC subject is ...:environment:github-pages, which the AWS role does not trust.
+    permissions:
+      pages: write # lets deploy-pages publish the site
+      id-token: write # lets deploy-pages prove to GitHub that the deployment comes from this workflow
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

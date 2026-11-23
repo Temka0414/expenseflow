@@ -67,7 +67,11 @@ _MODEL_ID_PATTERN: Final = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:/-]*")
 _EMAIL_PATTERN: Final = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 # `owner/repo`, or `owner@<id>/repo@<id>`: GitHub's immutable OIDC subject format, used by repositories
 # created after 2026-07-15 (`gh api repos/OWNER/REPO --jq '.owner.id, .id'` prints the ids).
-_GITHUB_REPO_PATTERN: Final = re.compile(r"[A-Za-z0-9_.-]+(?:@\d+)?/[A-Za-z0-9_.-]+(?:@\d+)?")
+# Both ids or neither: `owner@1/repo` would build a subject GitHub never sends.
+_GITHUB_NAME: Final = r"[A-Za-z0-9_.-]+"
+_GITHUB_REPO_PATTERN: Final = re.compile(
+    rf"{_GITHUB_NAME}/{_GITHUB_NAME}|{_GITHUB_NAME}@\d+/{_GITHUB_NAME}@\d+"
+)
 _OIDC_PROVIDER_ARN_PATTERN: Final = re.compile(r"arn:aws[a-z-]*:iam::\d{12}:oidc-provider/\S+")
 _INTEGER_PATTERN: Final = re.compile(r"-?\d+")
 

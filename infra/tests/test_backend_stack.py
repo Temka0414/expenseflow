@@ -730,6 +730,11 @@ def test_optional_emails(make_app: AppFactory, assert_nag_clean: NagCheck) -> No
     template.has_resource_properties(
         "AWS::SNS::Subscription", {"Protocol": "email", "Endpoint": "ops@example.com"}
     )
+    # The address must not leak into the logical ID: `cdk deploy` prints logical IDs in its event lines,
+    # and GitHub masks a secret only when it appears exactly, not with its punctuation removed.
+    (subscription_id,) = template.find_resources("AWS::SNS::Subscription")
+    assert "ops" not in subscription_id.lower()
+    assert subscription_id.startswith("MonitoringAlarmEmailSubscription")
     template.has_resource_properties("AWS::SES::EmailIdentity", {"EmailIdentity": "noreply@example.com"})
     notifier = _functions(template)["handlers.notifier.handler"]
     assert notifier["Environment"]["Variables"]["SENDER_EMAIL"] == "noreply@example.com"

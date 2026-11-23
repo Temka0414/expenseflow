@@ -58,6 +58,7 @@ Without `gh`: create an empty repository on <https://github.com/new>, then follo
 Then open the repository on GitHub and check:
 
 - **Actions** tab: the `CI` workflow runs. It should turn green.
+- The `Pages` workflow runs too and fails with "Ensure GitHub Pages has been enabled". That is expected until step 3: afterwards, open the failed run and click **Re-run all jobs**.
 - The README renders, and the images show.
 
 ## 3. Turn on the live demo (GitHub Pages)
@@ -109,7 +110,7 @@ Rules that keep it clean:
 
 - One lesson per pull request. If it grows, split it.
 - Small commits with clear messages: what and why.
-- Turn on branch protection for `main` after the first week ([phase 9](../playbook/09-cicd.md), step 5).
+- Add the `main` ruleset ([phase 9](../playbook/09-cicd.md), step 5) as soon as CI has run once, and before you switch on the AWS deploy (the `AWS_REGION` variable).
 
 ## 5. Take good screenshots
 

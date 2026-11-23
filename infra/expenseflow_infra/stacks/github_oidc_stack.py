@@ -72,6 +72,15 @@ class GitHubOidcStack(Stack):
             value=self.deploy_role.role_arn,
             description="role-to-assume for the GitHub deploy workflow",
         )
+        # configure-aws-credentials logs "Authenticated as assumedRoleId AROA...:GitHubActions" before it
+        # masks the account ID, and a role's unique ID can be resolved back to its ARN (with the account ID).
+        # deploy.yml masks it when this value is stored as the secret AWS_DEPLOY_ROLE_ID.
+        CfnOutput(
+            self,
+            "DeployRoleId",
+            value=self.deploy_role.role_id,
+            description="unique id of the deploy role, masked in the public GitHub Actions log",
+        )
 
     def _provider_arn(self, existing_arn: str | None) -> str:
         """Create GitHub's OIDC provider, or reuse an existing one (`-c githubOidcProviderArn=`).

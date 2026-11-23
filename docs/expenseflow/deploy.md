@@ -213,7 +213,7 @@ Example:
 .\scripts\deploy.ps1 -c alarmEmail=you@example.com -c senderEmail=you@example.com -c autoApproveLimit=3000
 ```
 
-The CDK does not remember flags between runs. Pass the same flags on **every** deploy, or they fall back to their defaults (or edit the values in `infra\cdk.json`).
+The CDK does not remember flags between runs. Pass the same flags on **every** deploy, or they fall back to their defaults. Do not put them in `infra\cdk.json` instead: that file is public once you push, so an `alarmEmail` there publishes your address, and the GitHub deploy ([phase 9](../playbook/09-cicd.md)) passes its own flags.
 
 ## 13. What it costs
 
