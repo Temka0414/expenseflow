@@ -33,7 +33,7 @@ Check the account number and Region it prints. Use another Region if your accoun
 
 ```powershell
 cd C:\src
-git clone https://github.com/<your-github-user>/expenseflow.git
+git clone https://github.com/Temka0414/expenseflow.git
 cd expenseflow
 
 python -m venv .venv

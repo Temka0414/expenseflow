@@ -149,8 +149,6 @@ Open the root [README.md](../../README.md) and check:
 - [ ] The first paragraph says **what it is and why it matters** in plain words
 - [ ] The CI badge is green, the demo link works
 - [ ] Four screenshots show
-- [ ] "How this was built" is honest
-- [ ] The **What I learned** section is filled in with *your* sentences
 - [ ] The cost note and the teardown command are there (a reviewer who deploys your project will thank you)
 - [ ] On GitHub: **About > Description**, **Website** (demo link) and **Topics**, for example `aws`, `cdk`, `serverless`, `step-functions`, `bedrock`, `react`
 - [ ] The repository is **pinned** on your GitHub profile

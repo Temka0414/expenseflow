@@ -14,7 +14,7 @@ A local test takes seconds and costs nothing. A deploy takes minutes, and a fail
 
 ```powershell
 cd C:\src
-git clone https://github.com/<your-github-user>/expenseflow.git
+git clone https://github.com/Temka0414/expenseflow.git
 cd expenseflow
 ```
 

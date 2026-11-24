@@ -89,23 +89,6 @@ Start with **[docs/README.md](docs/README.md)**. It has the course map:
 
 Estimates, not measurements. A lightly used `dev` stage costs cents to a few USD per month, because everything bills per use. **Reading one receipt with Claude Opus 5.5 costs roughly USD 0.02 to 0.06.** Set a budget alert before you deploy ([playbook phase 1](docs/playbook/01-account-guardrails.md)), and remove everything with `npx cdk destroy --all` when you are done ([phase 10](docs/playbook/10-teardown-prod.md)).
 
-## What I learned
-
-<!--
-Fill this in with your own words after a few lessons. Keep it short and concrete.
-Template:
-- One thing about AWS that surprised me: ...
-- The hardest bug and how I found it: ...
-- What I would do differently: ...
-- What I want to learn next: ...
--->
-
-*(Your notes go here. See [LEARNING_LOG.md](LEARNING_LOG.md) for the raw material.)*
-
-## How this was built
-
-*(Write one honest paragraph: which parts you wrote, which parts an AI assistant helped with, and what you did to understand and verify them.)*
-
 ## License
 
 [MIT](LICENSE) © 2026 Temuulen
